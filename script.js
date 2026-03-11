@@ -1,17 +1,21 @@
-const form = document.getElementById('contactForm');
-const note = document.getElementById('formNote');
-const submitBtn = document.getElementById('submitBtn');
-
-if (form) {
-  form.addEventListener('submit', () => {
-    // Allow normal POST submission to FormSubmit and only show UI feedback.
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-    }
-
-    if (note) {
-      note.textContent = 'Submitting your details...';
-    }
-  });
+function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
 }
+const links = document.querySelectorAll(".nav-links a");
+
+links.forEach(link=>{
+link.addEventListener("click", ()=>{
+document.getElementById("navLinks").classList.remove("active");
+});
+});
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("active");
+observer.unobserve(entry.target);
+}
+});
+},{
+threshold:0.15
+});
